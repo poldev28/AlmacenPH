@@ -197,3 +197,318 @@ footer a:hover {
         font-size: 2.5rem;
     }
 }
+
+/* ===================================================
+   INTRO SPLASH - ANIMACIÓN DEL CARPINCHO (SENIOR UX)
+   =================================================== */
+.intro-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffffff 0%, #f6faf1 55%, #e6f0da 100%);
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1), transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.intro-splash.intro-fade-out {
+    opacity: 0;
+    transform: scale(1.03);
+    pointer-events: none;
+}
+
+.skip-btn {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid #cce2bb;
+    color: #497255;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.skip-btn:hover {
+    background: #5c8d6d;
+    color: #ffffff;
+    border-color: #5c8d6d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(92, 141, 109, 0.25);
+}
+
+.intro-stage-container {
+    position: relative;
+    width: min(88vw, 440px);
+    height: min(88vw, 440px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ondas circulares / aureolas del charco de agua */
+.water-pond-ambient {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 110px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.water-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 2px solid rgba(135, 195, 218, 0.5);
+    background: radial-gradient(ellipse at center, rgba(162, 220, 240, 0.35) 0%, rgba(162, 220, 240, 0.08) 50%, transparent 75%);
+    opacity: 0;
+}
+
+.water-ring.ring-1 {
+    width: 140px;
+    height: 55px;
+    animation: pond-breathe 2.4s ease-out infinite;
+}
+
+.water-ring.ring-2 {
+    width: 210px;
+    height: 80px;
+    animation: pond-breathe 2.4s ease-out 0.8s infinite;
+}
+
+.water-ring.ring-3 {
+    width: 280px;
+    height: 105px;
+    animation: pond-breathe 2.4s ease-out 1.6s infinite;
+}
+
+@keyframes pond-breathe {
+    0% {
+        transform: translate(-50%, -50%) scale(0.65);
+        opacity: 0;
+    }
+    40% {
+        opacity: 0.85;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.35);
+        opacity: 0;
+    }
+}
+
+/* Escenario del carpincho */
+.carpincho-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.c-step {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    object-fit: contain;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.c-step.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Fase 1: Caminando hacia el charco */
+.c-step1.active {
+    animation: carpincho-walk 1.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes carpincho-walk {
+    0% {
+        transform: translateX(-65px) translateY(4px);
+    }
+    25% {
+        transform: translateX(-40px) translateY(-8px);
+    }
+    50% {
+        transform: translateX(-20px) translateY(3px);
+    }
+    75% {
+        transform: translateX(-7px) translateY(-6px);
+    }
+    100% {
+        transform: translateX(0px) translateY(0px);
+    }
+}
+
+/* Fase 2: Mirando con ternura al visitante */
+.c-step2.active {
+    animation: carpincho-look 1.2s ease-out forwards;
+}
+
+@keyframes carpincho-look {
+    0% {
+        transform: scale(0.97) translateY(2px);
+    }
+    50% {
+        transform: scale(1.02) translateY(-3px);
+    }
+    100% {
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Fase 3: Salto y chapuzón */
+.c-step3.active {
+    animation: carpincho-dive 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes carpincho-dive {
+    0% {
+        transform: translateY(8px) scale(0.95);
+    }
+    35% {
+        transform: translateY(-42px) scale(1.06);
+    }
+    65% {
+        transform: translateY(14px) scale(1.02);
+    }
+    100% {
+        transform: translateY(8px) scale(1);
+    }
+}
+
+/* Salpicaduras de agua animadas */
+.water-splash-fx {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 90px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 3;
+}
+
+.water-splash-fx.active {
+    opacity: 1;
+}
+
+.splash-drop {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background: #7ec0db;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.water-splash-fx.active .drop-1 {
+    left: 20%;
+    animation: drop-shoot-1 0.75s ease-out forwards;
+}
+.water-splash-fx.active .drop-2 {
+    left: 38%;
+    animation: drop-shoot-2 0.85s ease-out 0.05s forwards;
+}
+.water-splash-fx.active .drop-3 {
+    left: 62%;
+    animation: drop-shoot-3 0.8s ease-out 0.08s forwards;
+}
+.water-splash-fx.active .drop-4 {
+    left: 80%;
+    animation: drop-shoot-4 0.75s ease-out 0.02s forwards;
+}
+
+@keyframes drop-shoot-1 {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+    50% { transform: translate(-32px, -48px) scale(1.3); opacity: 0.9; }
+    100% { transform: translate(-48px, 16px) scale(0.3); opacity: 0; }
+}
+
+@keyframes drop-shoot-2 {
+    0% { transform: translate(0, 0) scale(0.6); opacity: 1; }
+    50% { transform: translate(-12px, -64px) scale(1.4); opacity: 0.95; }
+    100% { transform: translate(-18px, 22px) scale(0.3); opacity: 0; }
+}
+
+@keyframes drop-shoot-3 {
+    0% { transform: translate(0, 0) scale(0.6); opacity: 1; }
+    50% { transform: translate(16px, -58px) scale(1.4); opacity: 0.95; }
+    100% { transform: translate(26px, 22px) scale(0.3); opacity: 0; }
+}
+
+@keyframes drop-shoot-4 {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+    50% { transform: translate(36px, -44px) scale(1.2); opacity: 0.9; }
+    100% { transform: translate(52px, 16px) scale(0.3); opacity: 0; }
+}
+
+/* Texto de bienvenida en la intro */
+.intro-caption {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 4;
+}
+
+.intro-caption.visible {
+    opacity: 1;
+}
+
+.intro-welcome {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #638a6e;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.intro-title {
+    font-family: 'Caveat', cursive;
+    font-size: 2.7rem;
+    color: #3b5a46;
+    margin: 0;
+    line-height: 1;
+}
+
+.intro-island {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7d9a83;
+    margin-top: 3px;
+    font-weight: 700;
+}

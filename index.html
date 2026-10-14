@@ -7,6 +7,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Pantalla de bienvenida interactiva: Animación del Carpincho -->
+    <div id="intro-splash" class="intro-splash" aria-label="Bienvenida Almacén PH">
+        <button id="skip-intro" class="skip-btn" type="button">Saltar intro ✕</button>
+        
+        <div class="intro-stage-container">
+            <!-- Charco de agua con aureolas / ondas circulares -->
+            <div class="water-pond-ambient" id="water-pond">
+                <div class="water-ring ring-1"></div>
+                <div class="water-ring ring-2"></div>
+                <div class="water-ring ring-3"></div>
+            </div>
+
+            <!-- Contenedor del carpincho con las tres fases -->
+            <div class="carpincho-stage" id="carpincho-stage">
+                <!-- Fase 1: Caminando hacia el charco -->
+                <img src="img/carpincho-paso1.png" alt="Carpincho caminando" class="c-step c-step1 active" id="c-step1">
+                <!-- Fase 2: Llega a la orilla y mira al visitante -->
+                <img src="img/carpincho-paso2.png" alt="Carpincho en la orilla mirando" class="c-step c-step2" id="c-step2">
+                <!-- Fase 3: Salto y chapuzón en el agua -->
+                <img src="img/carpincho-paso3.png" alt="Carpincho chapuzón" class="c-step c-step3" id="c-step3">
+            </div>
+
+            <!-- Gotas y salpicaduras de agua animadas -->
+            <div class="water-splash-fx" id="water-splash-fx">
+                <span class="splash-drop drop-1"></span>
+                <span class="splash-drop drop-2"></span>
+                <span class="splash-drop drop-3"></span>
+                <span class="splash-drop drop-4"></span>
+            </div>
+
+            <!-- Mensaje sutil de bienvenida -->
+            <div class="intro-caption" id="intro-caption">
+                <p class="intro-welcome">Bienvenidos al</p>
+                <h2 class="intro-title">Almacén PH</h2>
+                <p class="intro-island">Isla Martín García</p>
+            </div>
+        </div>
+    </div>
+
     <header>
         <nav>
             <ul>
@@ -52,5 +91,69 @@
         <p>Almacén PH - Isla Martín García</p>
         <p>Conectando la historia y la naturaleza | <a href="historia.html">Conoce sobre nuestra isla</a></p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const splash = document.getElementById('intro-splash');
+            const skipBtn = document.getElementById('skip-intro');
+            const step1 = document.getElementById('c-step1');
+            const step2 = document.getElementById('c-step2');
+            const step3 = document.getElementById('c-step3');
+            const splashFx = document.getElementById('water-splash-fx');
+            const caption = document.getElementById('intro-caption');
+
+            let hasFinished = false;
+
+            function finishIntro() {
+                if (hasFinished) return;
+                hasFinished = true;
+                if (splash) {
+                    splash.classList.add('intro-fade-out');
+                    setTimeout(() => {
+                        splash.style.display = 'none';
+                    }, 800);
+                }
+            }
+
+            // Si el usuario hace click en Saltar o en la pantalla
+            if (skipBtn) {
+                skipBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    finishIntro();
+                });
+            }
+            if (splash) {
+                splash.addEventListener('click', finishIntro);
+            }
+
+            // Secuencia de animación:
+            // 0s - 1.25s: Camina hacia el charco
+            setTimeout(() => {
+                if (hasFinished) return;
+                // 1.25s: Llega al borde del agua y mira al visitante
+                if (step1) step1.classList.remove('active');
+                if (step2) step2.classList.add('active');
+            }, 1250);
+
+            setTimeout(() => {
+                if (hasFinished) return;
+                // 2.45s: ¡Se tira al agua con chapuzón y salpicaduras!
+                if (step2) step2.classList.remove('active');
+                if (step3) step3.classList.add('active');
+                if (splashFx) splashFx.classList.add('active');
+            }, 2450);
+
+            setTimeout(() => {
+                if (hasFinished) return;
+                // 3.1s: Aparece el mensaje de bienvenida
+                if (caption) caption.classList.add('visible');
+            }, 3100);
+
+            setTimeout(() => {
+                // 3.85s: Se desvanece suavemente revelando la web
+                finishIntro();
+            }, 3850);
+        });
+    </script>
 </body>
 </html>
