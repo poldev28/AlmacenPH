@@ -253,10 +253,22 @@ footer a:hover {
     box-shadow: 0 6px 16px rgba(92, 141, 109, 0.25);
 }
 
+.intro-content-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 440px;
+    padding: 10px;
+}
+
 .intro-stage-container {
     position: relative;
-    width: min(88vw, 440px);
-    height: min(88vw, 440px);
+    width: min(80vw, 340px);
+    height: min(80vw, 340px);
+    max-height: 48vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -472,10 +484,8 @@ footer a:hover {
 
 /* Texto de bienvenida en la intro */
 .intro-caption {
-    position: absolute;
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    margin-top: 6px;
     text-align: center;
     width: 100%;
     opacity: 0;
@@ -511,4 +521,19 @@ footer a:hover {
     color: #7d9a83;
     margin-top: 3px;
     font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .skip-btn {
+        top: 16px;
+        right: 16px;
+        padding: 5px 14px;
+        font-size: 0.85rem;
+    }
+    .intro-title {
+        font-size: 2.2rem;
+    }
+    .intro-welcome {
+        font-size: 1.35rem;
+    }
 }

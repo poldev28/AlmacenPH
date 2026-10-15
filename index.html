@@ -4,37 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Almacén PH - Isla Martín García</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.5">
+    <style>
+        /* Estilos críticos para asegurar carga instantánea y responsiva en celulares */
+        .intro-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #ffffff 0%, #f6faf1 55%, #e6f0da 100%);
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        .intro-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 440px;
+        }
+        .intro-stage-container {
+            position: relative;
+            width: min(80vw, 340px);
+            height: min(80vw, 340px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .c-step {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .c-step.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .skip-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #cce2bb;
+            color: #497255;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-family: sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 20;
+        }
+    </style>
 </head>
 <body>
     <!-- Pantalla de bienvenida interactiva: Animación del Carpincho -->
     <div id="intro-splash" class="intro-splash" aria-label="Bienvenida Almacén PH">
         <button id="skip-intro" class="skip-btn" type="button">Saltar intro ✕</button>
         
-        <div class="intro-stage-container">
-            <!-- Charco de agua con aureolas / ondas circulares -->
-            <div class="water-pond-ambient" id="water-pond">
-                <div class="water-ring ring-1"></div>
-                <div class="water-ring ring-2"></div>
-                <div class="water-ring ring-3"></div>
-            </div>
+        <div class="intro-content-wrapper">
+            <div class="intro-stage-container">
+                <!-- Charco de agua con aureolas / ondas circulares -->
+                <div class="water-pond-ambient" id="water-pond">
+                    <div class="water-ring ring-1"></div>
+                    <div class="water-ring ring-2"></div>
+                    <div class="water-ring ring-3"></div>
+                </div>
 
-            <!-- Contenedor del carpincho con las tres fases -->
-            <div class="carpincho-stage" id="carpincho-stage">
-                <!-- Fase 1: Caminando hacia el charco -->
-                <img src="img/carpincho-paso1.png" alt="Carpincho caminando" class="c-step c-step1 active" id="c-step1">
-                <!-- Fase 2: Llega a la orilla y mira al visitante -->
-                <img src="img/carpincho-paso2.png" alt="Carpincho en la orilla mirando" class="c-step c-step2" id="c-step2">
-                <!-- Fase 3: Salto y chapuzón en el agua -->
-                <img src="img/carpincho-paso3.png" alt="Carpincho chapuzón" class="c-step c-step3" id="c-step3">
-            </div>
+                <!-- Contenedor del carpincho con las tres fases -->
+                <div class="carpincho-stage" id="carpincho-stage">
+                    <!-- Fase 1: Caminando hacia el charco -->
+                    <img src="img/carpincho-paso1.png" alt="Carpincho caminando" class="c-step c-step1 active" id="c-step1">
+                    <!-- Fase 2: Llega a la orilla y mira al visitante -->
+                    <img src="img/carpincho-paso2.png" alt="Carpincho en la orilla mirando" class="c-step c-step2" id="c-step2">
+                    <!-- Fase 3: Salto y chapuzón en el agua -->
+                    <img src="img/carpincho-paso3.png" alt="Carpincho chapuzón" class="c-step c-step3" id="c-step3">
+                </div>
 
-            <!-- Gotas y salpicaduras de agua animadas -->
-            <div class="water-splash-fx" id="water-splash-fx">
-                <span class="splash-drop drop-1"></span>
-                <span class="splash-drop drop-2"></span>
-                <span class="splash-drop drop-3"></span>
-                <span class="splash-drop drop-4"></span>
+                <!-- Gotas y salpicaduras de agua animadas -->
+                <div class="water-splash-fx" id="water-splash-fx">
+                    <span class="splash-drop drop-1"></span>
+                    <span class="splash-drop drop-2"></span>
+                    <span class="splash-drop drop-3"></span>
+                    <span class="splash-drop drop-4"></span>
+                </div>
             </div>
 
             <!-- Mensaje sutil de bienvenida -->
